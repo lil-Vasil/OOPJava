@@ -4,7 +4,7 @@ public class Account {
 
     public static final String DEFAULT_SERVICE_NAME = "Интернет 100мб\'сек";
 
-    IndividualsTariff tariff;
+    private IndividualsTariff tariff;
     private Person person;
     private int number;
 

@@ -27,12 +27,13 @@ public class IndividualsTariff {
             services[countOfServices] = service;
             countOfServices++;
         } else {
-            Service[] services1 = Arrays.copyOf(services, services.length * 2);
+            services = Arrays.copyOf(services, services.length * 2);
         }
         return true;
     }
 
     public boolean addServicesByNumber(int index, Service service) {
+        if (services[index] == null) countOfServices++;
         services[index] = service;
         return true;
     }
@@ -80,7 +81,7 @@ public class IndividualsTariff {
             services[j] = services[j + 1];
         }
         services[countOfServices - 1] = null;
-        --countOfServices;
+        countOfServices--;
         return oldService;
     }
 
@@ -90,12 +91,12 @@ public class IndividualsTariff {
 
     public Service[] serviceNotNullArray() {
         Service[] newArray = new Service[countOfServices];
-        countOfServices = 0;
+        int count = 0;
         for (Service service : services) {
             if (service != null) {
-                newArray[countOfServices] = service;
+                newArray[count] = service;
+                count++;
             }
-            countOfServices++;
 
         }
         return newArray;
@@ -121,8 +122,8 @@ public class IndividualsTariff {
     public int getPrice() {
         int price = 0;
         Service[] services = serviceNotNullArray();
-        for (int i = 0; i < services.length ; i++) {
-                price += services[i].getPrice();
+        for (Service service : services) {
+            price += service.getPrice();
         }
         return price + MAX_PRICE;
     }
