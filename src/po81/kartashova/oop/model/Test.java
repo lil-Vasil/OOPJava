@@ -32,8 +32,8 @@ public class Test {
         myAccount.getAccount(3);
         myAccount.setAccount(4, accountVasilina);
         myAccount.removeAccount(7);
-        IndividualsTariff myTariff = myAccount.getTariff(1);
-        IndividualsTariff tariff = myAccount.setTariff(3, mtsPlus);
+        Tariff myTariff = myAccount.getTariff(1);
+        Tariff tariff = myAccount.setTariff(3, mtsPlus);
         int count = myAccount.getCountOfAccounts();
 
         megafonPlus.addService(internet);
@@ -52,6 +52,5 @@ public class Test {
     }
 
     public static void lab2tests() {
-
     }
 }

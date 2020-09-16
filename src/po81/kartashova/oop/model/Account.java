@@ -4,7 +4,7 @@ public class Account {
 
     public static final String DEFAULT_SERVICE_NAME = "Интернет 100мб\'сек";
 
-    private IndividualsTariff tariff;
+    private Tariff tariff;
     private Person person;
     private int number;
 
@@ -15,7 +15,7 @@ public class Account {
         tariff.addService(new Service(DEFAULT_SERVICE_NAME, 100));
     }
 
-    public Account(int number, Person person, IndividualsTariff tariff) {
+    public Account(int number, Person person, Tariff tariff) {
         this.number = number;
         this.person = person;
         this.tariff = tariff;
@@ -29,11 +29,11 @@ public class Account {
         return person;
     }
 
-    public IndividualsTariff getTariff() {
+    public Tariff getTariff() {
         return tariff;
     }
 
-    public void setTariff(IndividualsTariff tariff) {
+    public void setTariff(Tariff tariff) {
         this.tariff = tariff;
     }
 }

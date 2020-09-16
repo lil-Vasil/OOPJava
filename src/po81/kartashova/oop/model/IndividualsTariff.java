@@ -2,7 +2,7 @@ package po81.kartashova.oop.model;
 
 import java.util.Arrays;
 
-public class IndividualsTariff {
+public class IndividualsTariff implements Tariff {
 
     public static final int DEFAULT_SIZE = 8;
     public static final int MAX_PRICE = 50;
@@ -22,6 +22,7 @@ public class IndividualsTariff {
         this.services = services;
     }
 
+    @Override
     public boolean addService(Service service) {
         if (countOfServices <= DEFAULT_SIZE) {
             services[countOfServices] = service;
@@ -32,16 +33,19 @@ public class IndividualsTariff {
         return true;
     }
 
+    @Override
     public boolean addServicesByNumber(int index, Service service) {
         if (services[index] == null) countOfServices++;
         services[index] = service;
         return true;
     }
 
+    @Override
     public Service getService(int countOfServices) {
         return services[countOfServices];
     }
 
+    @Override
     public Service getLinkByName(String name) {
         for (int i = 0; i <= DEFAULT_SIZE; i++) {
             if (services[i].getName().equals(name)) {
@@ -51,6 +55,7 @@ public class IndividualsTariff {
         return null;
     }
 
+    @Override
     public boolean getServiceByName(String name) {
         for (int i = 0; i <= DEFAULT_SIZE; i++) {
             if (services[i].getName().equals(name)) {
@@ -60,6 +65,7 @@ public class IndividualsTariff {
         return false;
     }
 
+    @Override
     public Service changeLinkByIndex(int index, Service service) {
         Service oldService = services[index];
         services[index] = service;
@@ -67,7 +73,7 @@ public class IndividualsTariff {
         return oldService;
     }
 
-
+    @Override
     public Service deleteServiceByIndex(int index) {
         Service oldService = services[index];
         int i = 0;
@@ -85,10 +91,31 @@ public class IndividualsTariff {
         return oldService;
     }
 
+    @Override
+    public Service deleteServiceByName(String name) {
+        Service oldService = null;
+        int i = 0;
+        for (; i <= DEFAULT_SIZE; i++) {
+            if (services[i].getName().equals(name)) {
+                oldService = services[i];
+                services[i] = null;
+                break;
+            }
+        }
+        for (int j = i; i < countOfServices - 1; i++) {
+            services[j] = services[j + 1];
+        }
+        services[countOfServices - 1] = null;
+        countOfServices--;
+        return oldService;
+    }
+
+    @Override
     public int getCountOfServices() {
         return countOfServices;
     }
 
+    @Override
     public Service[] serviceNotNullArray() {
         Service[] newArray = new Service[countOfServices];
         int count = 0;
@@ -102,6 +129,7 @@ public class IndividualsTariff {
         return newArray;
     }
 
+    @Override
     public Service[] servicesSortArray() {
         Service[] services = serviceNotNullArray();
         boolean isSorted = false;
@@ -119,6 +147,7 @@ public class IndividualsTariff {
         return services;
     }
 
+    @Override
     public int getPrice() {
         int price = 0;
         Service[] services = serviceNotNullArray();

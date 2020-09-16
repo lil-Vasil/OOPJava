@@ -71,7 +71,7 @@ public class AccountManager {
         return accounts;
     }
 
-    public IndividualsTariff getTariff(int accountNumber) {
+    public Tariff getTariff(int accountNumber) {
         for (Account account : accounts) {
             if (account != null & isNumberAccount(account, accountNumber)) {
                 return account.getTariff();
@@ -80,8 +80,8 @@ public class AccountManager {
         return null;
     }
 
-    public IndividualsTariff setTariff(int accountNumber, IndividualsTariff tariff) {
-        IndividualsTariff oldTariff = null;
+    public Tariff setTariff(int accountNumber, Tariff tariff) {
+        Tariff oldTariff = null;
         for (Account account : accounts) {
             if ((account != null) && isNumberAccount(account, accountNumber)) {
                 oldTariff = account.getTariff();
