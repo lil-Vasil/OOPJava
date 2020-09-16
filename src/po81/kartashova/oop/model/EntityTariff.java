@@ -1,6 +1,6 @@
 package po81.kartashova.oop.model;
 
-public class EntityTariff {
+public class EntityTariff implements Tariff {
 
     private Node head;
     private Node tail;
@@ -11,35 +11,66 @@ public class EntityTariff {
         this.tail = null;
     }
 
-    public EntityTariff(int size, Tariff[] objects) { //создание списка и заполнение его элементов
+    public EntityTariff(int size, Service[] services) { //создание списка и заполнение его элементов
         this.size = size;
-        for (Tariff object : objects) {
-            addObjectAtLast(object);
+        for (Service service : services) {
+            addService(service);
         }
     }
 
     private Node getNode(int index) { //получаем узлы списка
         Node node = head;
         if (checkIndex(index)) {
-            for (int i = -1; i <= index; i++) { //уточнить i=-1 и <= index
+            for (int i = -1; i < index; i++) { //уточнить i=-1 и <= index
                 node = node.next;
             }
         }
         return node;
     }
 
-    public boolean addObjectAtLast(Tariff object) { //добавляем узел в конец списка
+    private void addTo(int index, Service object) { //метод добавления объекта по индексу
+        Node nextNode = getNode(index);
+        Node prevNode = getNode(index - 1);
+        Node newNode = new Node(object); //конструктор
+        nextNode.previous = newNode;
+        if (head == null) {
+            head = newNode;
+        } else {
+            prevNode.next = newNode; //спросить на счет next (дописала сама)
+        }
+    }
+
+    private boolean checkIndex(int index) { // проверяем индекс
+        return (index >= 0 && index <= size);
+    }
+
+    //метод возвращающий ссылку на узел по его номеру в списке
+    private Node get(int index) {
+        return getNode(index); //спросить, нужно ли здесь условие и value
+    }
+
+    // метод удаляющий узел по его номеру в списке
+    private boolean removeNode(int index) { //проверить!
+        if (checkIndex(index)) {
+            getNode(index).setNext(getNode(index + 1));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addService(Service service) {
         Node lastNode = getNode(size - 1);
-        lastNode.next = new Node(object);
+        lastNode.next = new Node(service);
         size++;
         return true;
     }
 
-    //Todo метод, добавляющий узел в заданную позицию в списке
-    public boolean addObjectByIndex(int index, Tariff object) {
-        if (checkIndex(index)) {
+    @Override
+    public boolean addServicesByNumber(int index, Service object) { //метод, добавляющий узел в заданную позицию в списке
+        if (checkIndex(index)) { //почему подчеркивает?
             if (index == size) {
-                addObjectAtLast(object);
+                addService(object);
                 size++;
                 return true;
             } else {
@@ -51,65 +82,99 @@ public class EntityTariff {
         return false;
     }
 
-    private void addTo(int index, Tariff object) { //метод добавления объекта по индексу
-        Node nextNode = getNode(index);
-        Node prevNode = getNode(index - 1);
-        Node newNode = new Node(object); //конструктор
-        nextNode.previous = newNode;
-        if (head.value == null) {
-            head = newNode;
-        } else {
-            prevNode.next = newNode; //спросить на счет next
-        }
-    }
-
-    private boolean checkIndex(int index) { // проверяем индекс
-        return (index >= 0 && index <= size);
-    }
-
-    //Todo метод возвращающий ссылку на узел по его номеру в списке
-    public Tariff get(int index) {
-        return getNode(index); //спросить, нужно ли здесь условие и value
-    }
-
-    //Todo метод удаляющий узел по его номеру в списке
-    public boolean removeNode(int index) { //что вообще я здесь делаю
+    @Override
+    public Service getService(int index) {
+        Node newService = head;
         if (checkIndex(index)) {
-            getNode(index).setNext(getNode(index + 1));
-            return true;
+            for (int i = 0; i <= index; i++) {
+                newService = newService.next;
+            }
         }
+        return newService.object;
+    }
+
+    @Override
+    public Service getLinkByName(String name) { //Todo
+        return null;
+    }
+
+    @Override
+    public boolean getServiceByName(String name) { //Todo
         return false;
     }
 
+    @Override
+    public Service changeLinkByIndex(int index, Service service) { // метод, меняющий узел с заданным номером
+        if (checkIndex(index)) {
+            Service newService = getNode(index).object;
+            getNode(index).object = service;
+            return newService;
+        }
+        return null;
+    }
 
-    public class Node implements Tariff {
+    @Override
+    public Service deleteServiceByIndex(int index) {
+        if (checkIndex(index)) {
+            Service myNode = getNode(index).object;
+            removeNode(index);
+            return myNode;
+        }
+        return null;
 
-        Object value;
-        Node node;
-        Tariff object;
+    }
+
+    @Override
+    public Service deleteServiceByName(String name) {
+        for (int i = 0; i < size; i++) {
+            if (getNode(i).object.getName().equals(name)) {
+                removeNode(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int getCountOfServices() {
+        return size;
+    }
+
+    @Override
+    public Service[] serviceNotNullArray() {
+        Service[] services = new Service[size];
+        for (int i = 0; i < size; i++) {
+            services[i] = getNode(i).object;
+        }
+        return services;
+    }
+
+    @Override
+    public Service[] servicesSortArray() { //Todo
+        return null;
+    }
+
+    @Override
+    public int getPrice() {
+        int price = 0;
+        for (int i = 0; i < size; i++) {
+            price += getNode(i).object.getPrice();
+        }
+        return price;
+    }
+
+    public class Node {
+
+        Service object;
         Node next;
         Node previous;
 
-        public Node(Node node) {
-            this.node = node;
-        }
-
-        public Node(Object value, Node next, Node previous) {
-            this.value = value;
+        public Node(Node next, Node previous) {
             this.next = next;
             this.previous = previous;
         }
 
-        public Node(Tariff object) {
+        public Node(Service object) {
             this.object = object;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public void setValue(Object value) {
-            this.value = value;
         }
 
         public Node getNext() {
@@ -126,66 +191,6 @@ public class EntityTariff {
 
         public void setPrevious(Node previous) {
             this.previous = previous;
-        }
-
-        @Override
-        public boolean addService(Service service) {
-            return false;
-        }
-
-        @Override
-        public boolean addServicesByNumber(int index, Service service) {
-            return false;
-        }
-
-        @Override
-        public Service getService(int countOfService) {
-            return null;
-        }
-
-        @Override
-        public Service getLinkByName(String name) {
-            return null;
-        }
-
-        @Override
-        public boolean getServiceByName(String name) {
-            return false;
-        }
-
-        @Override
-        public Service changeLinkByIndex(int index, Service service) {
-            return null;
-        }
-
-        @Override
-        public Service deleteServiceByIndex(int index) {
-            return null;
-        }
-
-        @Override
-        public Service deleteServiceByName(String name) {
-            return null;
-        }
-
-        @Override
-        public int getCountOfServices() {
-            return 0;
-        }
-
-        @Override
-        public Service[] serviceNotNullArray() {
-            return new Service[0];
-        }
-
-        @Override
-        public Service[] servicesSortArray() {
-            return new Service[0];
-        }
-
-        @Override
-        public int getPrice() {
-            return 0;
         }
     }
 }
