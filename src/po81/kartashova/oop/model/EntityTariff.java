@@ -95,11 +95,21 @@ public class EntityTariff implements Tariff {
 
     @Override
     public Service getLinkByName(String name) { //Todo
+        for (int i = 0; i < size; i++) {
+            if (getNode(i).object.getName().equals(name)) {
+                return getNode(i).object;
+            }
+        }
         return null;
     }
 
     @Override
     public boolean getServiceByName(String name) { //Todo
+        for (int i = 0; i < size; i++) {
+            if (getNode(i).object.getName().equals(name)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -150,7 +160,20 @@ public class EntityTariff implements Tariff {
 
     @Override
     public Service[] servicesSortArray() { //Todo
-        return null;
+        Service[] services = serviceNotNullArray(); //почему подчеркивает
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 0; i < services.length - 1; i++) {
+                if (services[i].getPrice() > services[i + 1].getPrice()) {
+                    Service tmp = services[i + 1];
+                    services[i + 1] = services[i];
+                    services[i] = tmp;
+                    isSorted = false;
+                }
+            }
+        }
+        return services;
     }
 
     @Override

@@ -14,9 +14,9 @@ public class Test {
 
         IndividualsTariff mtsPlus = new IndividualsTariff();
         IndividualsTariff megafonPlus = new IndividualsTariff();
-        Account accountVlad = new Account(1, vlad, megafonPlus);
-        Account accountVasilina = new Account(2, vasilina, megafonPlus);
-        Account accountZina = new Account(3, zina, mtsPlus);
+        IndividualAccount accountVlad = new IndividualAccount(1, vlad, megafonPlus);
+        IndividualAccount accountVasilina = new IndividualAccount(2, vasilina, megafonPlus);
+        IndividualAccount accountZina = new IndividualAccount(3, zina, mtsPlus);
 
         AccountManager myAccount = new AccountManager(8);
         myAccount.addAccount(accountVlad);
@@ -27,7 +27,7 @@ public class Test {
         myAccount.addAccount(accountZina);
         myAccount.addAccount(accountZina);
         myAccount.addAccount(accountZina);
-        Account[] accounts = myAccount.getAccountsArray();
+        IndividualAccount[] accounts = myAccount.getAccountsArray();
         myAccount.addAccountByNumber(2, accountVasilina);
         myAccount.getAccount(3);
         myAccount.setAccount(4, accountVasilina);
