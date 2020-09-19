@@ -1,11 +1,14 @@
-package po81.kartashova.oop.model;
+package po81.kartashova.oop.model.tariff;
+
+import po81.kartashova.oop.model.Service;
 
 import java.util.Arrays;
 
-public class IndividualsTariff implements Tariff {
+public class IndividualsTariff extends AbstractTariff {
 
     public static final int DEFAULT_SIZE = 8;
     public static final int MAX_PRICE = 50;
+
 
     private Service[] services;
     int countOfServices = 0; //кол-во добавленных услуг
@@ -37,6 +40,7 @@ public class IndividualsTariff implements Tariff {
     public boolean addServicesByNumber(int index, Service service) {
         if (services[index] == null) countOfServices++;
         services[index] = service;
+
         return true;
     }
 
@@ -127,24 +131,6 @@ public class IndividualsTariff implements Tariff {
 
         }
         return newArray;
-    }
-
-    @Override
-    public Service[] servicesSortArray() {
-        Service[] services = serviceNotNullArray();
-        boolean isSorted = false;
-        while (!isSorted) {
-            isSorted = true;
-            for (int i = 0; i < services.length - 1; i++) {
-                if (services[i].getPrice() > services[i + 1].getPrice()) {
-                    Service tmp = services[i + 1];
-                    services[i + 1] = services[i];
-                    services[i] = tmp;
-                    isSorted = false;
-                }
-            }
-        }
-        return services;
     }
 
     @Override

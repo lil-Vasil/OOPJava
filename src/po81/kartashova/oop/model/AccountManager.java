@@ -1,19 +1,23 @@
 package po81.kartashova.oop.model;
 
+import po81.kartashova.oop.model.account.Account;
+import po81.kartashova.oop.model.account.IndividualAccount;
+import po81.kartashova.oop.model.tariff.Tariff;
+
 public class AccountManager {
 
-    private IndividualAccount[] accounts;
+    private Account[] accounts;
     private int count = 0;
 
     public AccountManager(int size) {
-        this.accounts = new IndividualAccount[size];
+        this.accounts = new Account[size];
     }
 
-    public AccountManager(IndividualAccount[] accounts) {
+    public AccountManager(Account[] accounts) {
         this.accounts = accounts;
     }
 
-    public boolean addAccount(IndividualAccount account) {
+    public boolean addAccount(Account account) {
         for (int i = 0; i < accounts.length; i++) {
             if (isNullAccount(i)) {
                 accounts[i] = account;
@@ -24,7 +28,7 @@ public class AccountManager {
         return true;
     }
 
-    public boolean addAccountByNumber(int index, IndividualAccount account) {
+    public boolean addAccountByNumber(int index, Account account) {
         if (isNullAccount(index)) {
             accounts[index] = account;
             count++;
@@ -37,18 +41,18 @@ public class AccountManager {
         return accounts[index] == null;
     }
 
-    public IndividualAccount getAccount(int index) {
+    public Account getAccount(int index) {
         return accounts[index];
     }
 
-    public IndividualAccount setAccount(int index, IndividualAccount account) {
-        IndividualAccount oldAccount = accounts[index];
+    public Account setAccount(int index, IndividualAccount account) {
+        Account oldAccount = accounts[index];
         accounts[index] = account;
         return oldAccount;
     }
 
-    public IndividualAccount removeAccount(int index) {
-        IndividualAccount oldAccount = accounts[index];
+    public Account removeAccount(int index) {
+        Account oldAccount = accounts[index];
         for (int i = 0; i < accounts.length; i++) {
             if (i == index) {
                 accounts[index] = null;
@@ -67,13 +71,13 @@ public class AccountManager {
         return count;
     }
 
-    public IndividualAccount[] getAccountsArray() {
+    public Account[] getAccountsArray() {
         return accounts;
     }
 
     public Tariff getTariff(int accountNumber) {
-        for (IndividualAccount account : accounts) {
-            if (account != null & isNumberAccount(account, accountNumber)) {
+        for (Account account : accounts) {
+            if (account != null & isNumberAccount(account, accountNumber)) { //task 8 ПАЧЕМУ ОРЕТ
                 return account.getTariff();
             }
         }
@@ -82,7 +86,7 @@ public class AccountManager {
 
     public Tariff setTariff(int accountNumber, Tariff tariff) {
         Tariff oldTariff = null;
-        for (IndividualAccount account : accounts) {
+        for (Account account : accounts) {
             if ((account != null) && isNumberAccount(account, accountNumber)) {
                 oldTariff = account.getTariff();
                 account.setTariff(tariff);
@@ -92,7 +96,7 @@ public class AccountManager {
     }
 
 
-    private boolean isNumberAccount(IndividualAccount account, int number) {
+    private boolean isNumberAccount(Account account, int number) {
         return account.getNumber() == number;
     }
 }

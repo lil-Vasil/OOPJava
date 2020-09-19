@@ -1,5 +1,10 @@
 package po81.kartashova.oop.model;
 
+import po81.kartashova.oop.model.account.Account;
+import po81.kartashova.oop.model.account.IndividualAccount;
+import po81.kartashova.oop.model.tariff.IndividualsTariff;
+import po81.kartashova.oop.model.tariff.Tariff;
+
 public class Test {
     public static void main(String[] args) {
 
@@ -27,7 +32,7 @@ public class Test {
         myAccount.addAccount(accountZina);
         myAccount.addAccount(accountZina);
         myAccount.addAccount(accountZina);
-        IndividualAccount[] accounts = myAccount.getAccountsArray();
+        Account[] accounts = myAccount.getAccountsArray();
         myAccount.addAccountByNumber(2, accountVasilina);
         myAccount.getAccount(3);
         myAccount.setAccount(4, accountVasilina);

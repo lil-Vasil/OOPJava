@@ -1,6 +1,11 @@
-package po81.kartashova.oop.model;
+package po81.kartashova.oop.model.account;
 
-class IndividualAccount {
+import po81.kartashova.oop.model.Person;
+import po81.kartashova.oop.model.Service;
+import po81.kartashova.oop.model.tariff.IndividualsTariff;
+import po81.kartashova.oop.model.tariff.Tariff;
+
+public class IndividualAccount implements Account {
 
     public static final String DEFAULT_SERVICE_NAME = "Интернет 100мб\'сек";
 

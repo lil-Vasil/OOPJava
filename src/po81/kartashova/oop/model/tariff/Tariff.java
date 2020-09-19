@@ -1,14 +1,16 @@
-package po81.kartashova.oop.model;
+package po81.kartashova.oop.model.tariff;
+
+import po81.kartashova.oop.model.Service;
 
 public interface Tariff {
 
-     boolean addService(Service service);
+    boolean addService(Service service);
 
-     boolean addServicesByNumber(int index, Service service);
+    boolean addServicesByNumber(int index, Service service);
 
-     Service getService(int countOfService);
+    Service getService(int countOfService);
 
-     Service getLinkByName(String name);
+    Service getLinkByName(String name);
 
      boolean getServiceByName(String name);
 

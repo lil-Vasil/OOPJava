@@ -1,6 +1,8 @@
-package po81.kartashova.oop.model;
+package po81.kartashova.oop.model.tariff;
 
-public class EntityTariff implements Tariff {
+import po81.kartashova.oop.model.Service;
+
+public class EntityTariff extends AbstractTariff {
 
     private Node head;
     private Node tail;
@@ -21,23 +23,11 @@ public class EntityTariff implements Tariff {
     private Node getNode(int index) { //получаем узлы списка
         Node node = head;
         if (checkIndex(index)) {
-            for (int i = -1; i < index; i++) { //уточнить i=-1 и <= index
+            for (int i = 0; i <= index; i++) { //уточнить i=-1 и <= index
                 node = node.next;
             }
         }
         return node;
-    }
-
-    private void addTo(int index, Service object) { //метод добавления объекта по индексу
-        Node nextNode = getNode(index);
-        Node prevNode = getNode(index - 1);
-        Node newNode = new Node(object); //конструктор
-        nextNode.previous = newNode;
-        if (head == null) {
-            head = newNode;
-        } else {
-            prevNode.next = newNode; //спросить на счет next (дописала сама)
-        }
     }
 
     private boolean checkIndex(int index) { // проверяем индекс
@@ -45,11 +35,12 @@ public class EntityTariff implements Tariff {
     }
 
     //метод возвращающий ссылку на узел по его номеру в списке
+
     private Node get(int index) {
         return getNode(index); //спросить, нужно ли здесь условие и value
     }
-
     // метод удаляющий узел по его номеру в списке
+
     private boolean removeNode(int index) { //проверить!
         if (checkIndex(index)) {
             getNode(index).setNext(getNode(index + 1));
@@ -57,7 +48,6 @@ public class EntityTariff implements Tariff {
         }
         return false;
     }
-
     @Override
     public boolean addService(Service service) {
         Node lastNode = getNode(size - 1);
@@ -80,6 +70,18 @@ public class EntityTariff implements Tariff {
             }
         }
         return false;
+    }
+
+    private void addTo(int index, Service object) { //метод добавления объекта по индексу
+        Node nextNode = getNode(index);
+        Node prevNode = getNode(index - 1);
+        Node newNode = new Node(object); //конструктор
+        nextNode.previous = newNode;
+        if (head == null) {
+            head = newNode;
+        } else {
+            prevNode.next = newNode; //спросить на счет next (дописала сама)
+        }
     }
 
     @Override
@@ -158,23 +160,6 @@ public class EntityTariff implements Tariff {
         return services;
     }
 
-    @Override
-    public Service[] servicesSortArray() { //Todo
-        Service[] services = serviceNotNullArray(); //почему подчеркивает
-        boolean isSorted = false;
-        while (!isSorted) {
-            isSorted = true;
-            for (int i = 0; i < services.length - 1; i++) {
-                if (services[i].getPrice() > services[i + 1].getPrice()) {
-                    Service tmp = services[i + 1];
-                    services[i + 1] = services[i];
-                    services[i] = tmp;
-                    isSorted = false;
-                }
-            }
-        }
-        return services;
-    }
 
     @Override
     public int getPrice() {
