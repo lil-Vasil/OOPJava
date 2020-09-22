@@ -45,9 +45,9 @@ public class Test {
         int number = IndividualAccount2.getNumber();
         Tariff tariff = IndividualAccount3.getTariff();
 
-        String entityPerson1 = "мегафон";
-        String entityPerson2 = "tele2";
-        String entityPerson3 = "мтс";
+        Person entityPerson1 = new Person("Vlad", "Gorbunov");
+        Person entityPerson2 = new Person("Vasilina", "Kartashova");
+        Person entityPerson3 = new Person("Zina", "Grebenkina");
         Account EntityAccount1 = new EntityAccount(1, entityPerson1, testTariff);
         Account EntityAccount2 = new EntityAccount(2, entityPerson2, testTariff);
         Account EntityAccount3 = new EntityAccount(3, entityPerson3, testTariff);

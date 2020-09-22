@@ -1,5 +1,6 @@
 package po81.kartashova.oop.model.account;
 
+import po81.kartashova.oop.model.Person;
 import po81.kartashova.oop.model.Service;
 import po81.kartashova.oop.model.tariff.IndividualsTariff;
 import po81.kartashova.oop.model.tariff.Tariff;
@@ -9,27 +10,27 @@ public class EntityAccount implements Account {
     public static final String DEFAULT_SERVICE_NAME = "Интернет 100мб\'сек";
 
     private Tariff tariff;
-    private String entityPerson;
+    private Person entityPerson;
     private int number;
 
-    public EntityAccount(int number, String entityPerson) {
+    public EntityAccount(int number, Person entityPerson) {
         this.entityPerson = entityPerson;
         tariff = new IndividualsTariff(1);
         tariff.addService(new Service(DEFAULT_SERVICE_NAME, 300));
 
     }
 
-    public EntityAccount(int number, String entityPerson, Tariff tariff) {
+    public EntityAccount(int number, Person entityPerson, Tariff tariff) {
         this.number = number;
         this.entityPerson = entityPerson;
         this.tariff = tariff;
     }
 
-    public String getPerson() {
+    public Person getPerson() {
         return entityPerson;
     }
 
-    public void setEntityPerson(String entityPerson) {
+    public void setEntityPerson(Person entityPerson) {
         this.entityPerson = entityPerson;
     }
 
