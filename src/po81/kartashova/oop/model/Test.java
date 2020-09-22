@@ -1,14 +1,61 @@
 package po81.kartashova.oop.model;
 
 import po81.kartashova.oop.model.account.Account;
+import po81.kartashova.oop.model.account.EntityAccount;
 import po81.kartashova.oop.model.account.IndividualAccount;
-import po81.kartashova.oop.model.tariff.IndividualsTariff;
+import po81.kartashova.oop.model.tariff.EntityTariff;
 import po81.kartashova.oop.model.tariff.Tariff;
 
 public class Test {
     public static void main(String[] args) {
+        Service service1 = new Service("service1", 50);
+        Service service2 = new Service("service2", 100);
+        Service service3 = new Service("service3", 150);
+        Service service4 = new Service("service4", 50);
+        Service service5 = new Service("service5", 200);
+        Service service6 = new Service("service6", 300);
+        Service service7 = new Service("service7", 250);
+        Service service8 = new Service("service8", 350);
+        Service[] services = new Service[8];
+        Tariff testTariff = new EntityTariff();
+        testTariff.addService(service1);
+        testTariff.addService(service2);
+        testTariff.addService(service3);
+        testTariff.addService(service4);
+        testTariff.addService(service5);
+        testTariff.addService(service6);
+        testTariff.addService(service7);
+        testTariff.addService(service8);
+        Service service = testTariff.getService(7);
+        Service deleteService = testTariff.deleteServiceByIndex(2);
+        testTariff.addServicesByNumber(2, service5);
+        Service changeService = testTariff.changeLinkByIndex(5, service1);
+        Service linkService = testTariff.getLinkByName("service1");
+        Service deleteServiceByName = testTariff.deleteServiceByName("service7");
+        int count = testTariff.getCountOfServices();
+        Service[] notNull = testTariff.serviceNotNullArray();
+        int price = testTariff.getPrice();
 
-        Service internet = new Service("internet", 300);
+        Person vlad = new Person("Vlad", "Gorbunov");
+        Person vasilina = new Person("Vasilina", "Kartashova");
+        Person zina = new Person("Zina", "Grebenkina");
+        Account IndividualAccount1 = new IndividualAccount(1, vlad);
+        Account IndividualAccount2 = new IndividualAccount(2, vasilina);
+        Account IndividualAccount3 = new IndividualAccount(3, zina);
+        int number = IndividualAccount2.getNumber();
+        Tariff tariff = IndividualAccount3.getTariff();
+
+        String entityPerson1 = "мегафон";
+        String entityPerson2 = "tele2";
+        String entityPerson3 = "мтс";
+        Account EntityAccount1 = new EntityAccount(1, entityPerson1, testTariff);
+        Account EntityAccount2 = new EntityAccount(2, entityPerson2, testTariff);
+        Account EntityAccount3 = new EntityAccount(3, entityPerson3, testTariff);
+        int accountNumber = EntityAccount1.getNumber();
+
+    }
+
+       /* Service internet = new Service("internet", 300);
         Service sms = new Service("sms", 150);
         Service calls = new Service("calls", 200);
         Service music = new Service("music", 350);
@@ -54,8 +101,12 @@ public class Test {
         megafonPlus.changeLinkByIndex(3, sms);
         int countOfServices = megafonPlus.getCountOfServices();
         Service[] myServices = megafonPlus.servicesSortArray();
-    }
 
-    public static void lab2tests() {
-    }
+
+         public static void lab2tests() {
+
+
+    }*/
+
+
 }

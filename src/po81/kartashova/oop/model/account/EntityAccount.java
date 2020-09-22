@@ -14,7 +14,6 @@ public class EntityAccount implements Account {
 
     public EntityAccount(int number, String entityPerson) {
         this.entityPerson = entityPerson;
-        // Todo инициализирует тариф - новым экземпляром с одной услугой "интернет 100 мб/сек", стоимостью 300 (?)
         tariff = new IndividualsTariff(1);
         tariff.addService(new Service(DEFAULT_SERVICE_NAME, 300));
 
@@ -26,7 +25,7 @@ public class EntityAccount implements Account {
         this.tariff = tariff;
     }
 
-    public String getEntityPerson() {
+    public String getPerson() {
         return entityPerson;
     }
 
@@ -36,7 +35,7 @@ public class EntityAccount implements Account {
 
     @Override
     public int getNumber() {
-        return 0;
+        return number;
     }
 
     @Override

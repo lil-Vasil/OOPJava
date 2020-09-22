@@ -9,4 +9,5 @@ public interface Account {
     Tariff getTariff();
 
     void setTariff(Tariff tariff);
+
 }
