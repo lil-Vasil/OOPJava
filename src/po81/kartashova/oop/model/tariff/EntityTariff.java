@@ -8,23 +8,22 @@ public class EntityTariff extends AbstractTariff {
     private Node tail;
     private int size;
 
-    public EntityTariff() { //конструктор, в который мы ничего не передаем
+    public EntityTariff() {
         this.head = null;
         this.tail = null;
     }
 
-    public EntityTariff(int size, Service[] services) { //создание списка и заполнение его элементов
+    public EntityTariff(int size, Service[] services) {
         this.size = size;
         for (Service service : services) {
             addService(service);
         }
     }
 
-    //todo
-    private Node getNode(int index) { //получаем узлы списка
+    private Node getNode(int index) {
         Node node = head;
         if (checkIndex(index)) {
-            for (int i = 0; i < index; i++) { //уточнить i=-1 и <= index
+            for (int i = 0; i < index; i++) {
                 node = node.next;
             }
         }
@@ -35,14 +34,12 @@ public class EntityTariff extends AbstractTariff {
         return (index >= 0 && index <= size);
     }
 
-    //метод возвращающий ссылку на узел по его номеру в списке
-
     private Node get(int index) {
-        return getNode(index); //спросить, нужно ли здесь условие и value
+        return getNode(index);
     }
 
-    //Todo проверить правильность работы метода
-    private boolean removeNode(int index) {  // метод удаляющий узел по его номеру в списке
+
+    private boolean removeNode(int index) {
         if (checkIndex(index)) {
             Node previous = getNode(index - 1);
             Node next = getNode(index + 1);
@@ -51,15 +48,14 @@ public class EntityTariff extends AbstractTariff {
             deleteNode.next = null;
             previous.next = next;
             next.previous = previous;
-//            getNode(index-1).next = getNode(index + 1);
-//            getNode(index+1).previous = getNode(index-1);
+            size--;
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean addService(Service service) { //done
+    public boolean addService(Service service) {
         Node last = tail;
         Node newNode = new Node(service, last, null);
         tail = newNode;
@@ -72,8 +68,8 @@ public class EntityTariff extends AbstractTariff {
         return true;
     }
 
-    @Override //Todo условие size++. Не работает замена
-    public boolean addServicesByNumber(int index, Service object) { //метод, добавляющий узел в заданную позицию в списке
+    @Override
+    public boolean addServicesByNumber(int index, Service object) {
         if (checkIndex(index)) {
             if (index == size) {
                 addService(object);
@@ -85,21 +81,21 @@ public class EntityTariff extends AbstractTariff {
         return false;
     }
 
-    //Todo работает, но не работает метод addServiceByIndex
-    private void addTo(int index, Service object) { //метод добавления объекта по индексу
+
+    private void addTo(int index, Service object) {
         Node nextNode = getNode(index);
         Node prevNode = getNode(index - 1);
-        Node newNode = new Node(object); //конструктор
+        Node newNode = new Node(object);
         nextNode.previous = newNode;
         if (head == null) {
             head = newNode;
         } else {
-            prevNode = newNode; //спросить на счет next (дописала сама)
+            prevNode = newNode;
         }
     }
 
     @Override
-    public Service getService(int index) { //done
+    public Service getService(int index) {
         Node newService = head;
         if (checkIndex(index)) {
             for (int i = 0; i < index; i++) {
@@ -110,7 +106,7 @@ public class EntityTariff extends AbstractTariff {
     }
 
     @Override
-    public Service getLinkByName(String name) { //done
+    public Service getLinkByName(String name) {
         for (int i = 0; i < size; i++) {
             if (getNode(i).object.getName().equals(name)) {
                 return getNode(i).object;
@@ -120,7 +116,7 @@ public class EntityTariff extends AbstractTariff {
     }
 
     @Override
-    public boolean getServiceByName(String name) { //done
+    public boolean getServiceByName(String name) {
         for (int i = 0; i < size; i++) {
             if (getNode(i).object.getName().equals(name)) {
                 return true;
@@ -130,7 +126,7 @@ public class EntityTariff extends AbstractTariff {
     }
 
     @Override
-    public Service changeLinkByIndex(int index, Service service) { //done
+    public Service changeLinkByIndex(int index, Service service) {
         if (checkIndex(index)) {
             Service newService = getNode(index).object;
             getNode(index).object = service;
@@ -139,7 +135,7 @@ public class EntityTariff extends AbstractTariff {
         return null;
     }
 
-    @Override //Todo
+    @Override
     public Service deleteServiceByIndex(int index) {
         if (checkIndex(index)) {
             Service myNode = getNode(index).object;
@@ -149,23 +145,25 @@ public class EntityTariff extends AbstractTariff {
         return null;
     }
 
-    @Override //Todo ? опять под вопросом метод removeNode
+    @Override
     public Service deleteServiceByName(String name) {
         for (int i = 0; i < size; i++) {
             if (getNode(i).object.getName().equals(name)) {
+                Service deletedService = getNode(i).object;
                 removeNode(i);
+                return deletedService;
             }
         }
         return null;
     }
 
     @Override
-    public int getCountOfServices() { //done
+    public int getCountOfServices() {
         return size;
     }
 
     @Override
-    public Service[] serviceNotNullArray() { //done
+    public Service[] serviceNotNullArray() {
         Service[] services = new Service[size];
         for (int i = 0; i < size; i++) {
             services[i] = getNode(i).object;
@@ -175,7 +173,7 @@ public class EntityTariff extends AbstractTariff {
 
 
     @Override
-    public int getPrice() {  //done
+    public int getPrice() {
         int price = 0;
         for (int i = 0; i < size; i++) {
             price += getNode(i).object.getPrice();
