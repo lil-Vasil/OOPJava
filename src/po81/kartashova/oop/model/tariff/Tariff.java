@@ -1,6 +1,7 @@
 package po81.kartashova.oop.model.tariff;
 
 import po81.kartashova.oop.model.Service;
+import po81.kartashova.oop.model.ServiceTypes;
 
 public interface Tariff {
 
@@ -28,5 +29,6 @@ public interface Tariff {
 
      int getPrice();
 
+    Service[] serviceTypesArray(ServiceTypes type);
 
 }

@@ -8,14 +8,14 @@ import po81.kartashova.oop.model.tariff.Tariff;
 
 public class Test {
     public static void main(String[] args) {
-        Service service1 = new Service("service1", 50);
-        Service service2 = new Service("service2", 100);
-        Service service3 = new Service("service3", 150);
-        Service service4 = new Service("service4", 50);
-        Service service5 = new Service("service5", 200);
-        Service service6 = new Service("service6", 300);
-        Service service7 = new Service("service7", 250);
-        Service service8 = new Service("service8", 350);
+        Service service1 = new Service(ServiceTypes.INTERNET, "service1", 50);
+        Service service2 = new Service(ServiceTypes.MAIL, "service2", 100);
+        Service service3 = new Service(ServiceTypes.PHONE, "service3", 150);
+        Service service4 = new Service(ServiceTypes.STORAGE, "service4", 50);
+        Service service5 = new Service(ServiceTypes.ADDITIONAL_SERVICE, "service5", 200);
+        Service service6 = new Service(ServiceTypes.INTERNET, "service6", 300);
+        Service service7 = new Service(ServiceTypes.PHONE, "service7", 250);
+        Service service8 = new Service(ServiceTypes.MAIL, "service8", 350);
         Service[] services = new Service[8];
         Tariff testTariff = new EntityTariff();
         testTariff.addService(service1);

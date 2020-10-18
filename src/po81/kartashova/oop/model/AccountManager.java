@@ -77,7 +77,7 @@ public class AccountManager {
 
     public Tariff getTariff(int accountNumber) {
         for (Account account : accounts) {
-            if (account != null & isNumberAccount(account, accountNumber)) { //task 8 ПАЧЕМУ ОРЕТ
+            if (account != null & isNumberAccount(account, accountNumber)) {
                 return account.getTariff();
             }
         }

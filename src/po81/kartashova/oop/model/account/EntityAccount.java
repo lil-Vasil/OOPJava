@@ -2,13 +2,14 @@ package po81.kartashova.oop.model.account;
 
 import po81.kartashova.oop.model.Person;
 import po81.kartashova.oop.model.Service;
+import po81.kartashova.oop.model.ServiceTypes;
 import po81.kartashova.oop.model.tariff.IndividualsTariff;
 import po81.kartashova.oop.model.tariff.Tariff;
 
 public class EntityAccount implements Account {
 
     public static final String DEFAULT_SERVICE_NAME = "Интернет 100мб\'сек";
-
+    private static ServiceTypes type = ServiceTypes.INTERNET;
     private Tariff tariff;
     private Person entityPerson;
     private int number;
@@ -16,7 +17,7 @@ public class EntityAccount implements Account {
     public EntityAccount(int number, Person entityPerson) {
         this.entityPerson = entityPerson;
         tariff = new IndividualsTariff(1);
-        tariff.addService(new Service(DEFAULT_SERVICE_NAME, 300));
+        tariff.addService(new Service(type, DEFAULT_SERVICE_NAME, 300));
 
     }
 

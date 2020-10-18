@@ -11,7 +11,7 @@ public class IndividualsTariff extends AbstractTariff {
 
 
     private Service[] services;
-    int countOfServices = 0; //кол-во добавленных услуг
+    int countOfServices = 0;
 
     public IndividualsTariff() {
         this.services = new Service[DEFAULT_SIZE];
@@ -142,6 +142,7 @@ public class IndividualsTariff extends AbstractTariff {
         }
         return price + MAX_PRICE;
     }
+
 }
 
 
