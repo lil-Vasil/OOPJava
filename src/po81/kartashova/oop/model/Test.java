@@ -1,7 +1,6 @@
 package po81.kartashova.oop.model;
 
 import po81.kartashova.oop.model.account.Account;
-import po81.kartashova.oop.model.account.EntityAccount;
 import po81.kartashova.oop.model.account.IndividualAccount;
 import po81.kartashova.oop.model.tariff.EntityTariff;
 import po81.kartashova.oop.model.tariff.Tariff;
@@ -42,17 +41,12 @@ public class Test {
         Account IndividualAccount1 = new IndividualAccount(1, vlad);
         Account IndividualAccount2 = new IndividualAccount(2, vasilina);
         Account IndividualAccount3 = new IndividualAccount(3, zina);
-        int number = IndividualAccount2.getNumber();
+        long number = IndividualAccount2.getNumber();
         Tariff tariff = IndividualAccount3.getTariff();
 
         Person entityPerson1 = new Person("Vlad", "Gorbunov");
         Person entityPerson2 = new Person("Vasilina", "Kartashova");
         Person entityPerson3 = new Person("Zina", "Grebenkina");
-        Account EntityAccount1 = new EntityAccount(1, entityPerson1, testTariff);
-        Account EntityAccount2 = new EntityAccount(2, entityPerson2, testTariff);
-        Account EntityAccount3 = new EntityAccount(3, entityPerson3, testTariff);
-        int accountNumber = EntityAccount1.getNumber();
-
     }
 
        /* Service internet = new Service("internet", 300);

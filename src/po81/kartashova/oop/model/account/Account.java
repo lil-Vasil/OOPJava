@@ -5,7 +5,7 @@ import po81.kartashova.oop.model.tariff.Tariff;
 
 public interface Account {
 
-    int getNumber();
+    long getNumber();
 
     Tariff getTariff();
 

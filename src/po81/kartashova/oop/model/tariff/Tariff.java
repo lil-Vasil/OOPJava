@@ -13,21 +13,21 @@ public interface Tariff {
 
     Service getLinkByName(String name);
 
-     boolean getServiceByName(String name);
+    boolean getServiceByName(String name);
 
-     Service changeLinkByIndex(int index, Service service);
+    Service changeLinkByIndex(int index, Service service);
 
-     Service deleteServiceByIndex(int index);
+    Service deleteServiceByIndex(int index);
 
-     Service deleteServiceByName(String name);
+    Service deleteServiceByName(String name);
 
-     int getCountOfServices();
+    int getCountOfServices();
 
-     Service[] serviceNotNullArray();
+    Service[] serviceNotNullArray();
 
-     Service[] servicesSortArray();
+    Service[] servicesSortArray();
 
-     int getPrice();
+    int getPrice();
 
     Service[] serviceTypesArray(ServiceTypes type);
 

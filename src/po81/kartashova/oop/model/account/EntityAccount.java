@@ -6,7 +6,7 @@ import po81.kartashova.oop.model.ServiceTypes;
 import po81.kartashova.oop.model.tariff.IndividualsTariff;
 import po81.kartashova.oop.model.tariff.Tariff;
 
-public class EntityAccount implements Account {
+public class EntityAccount extends AbstractAccount {
 
     public static final String DEFAULT_SERVICE_NAME = "Интернет 100мб\'сек";
     private static ServiceTypes type = ServiceTypes.INTERNET;
@@ -22,9 +22,8 @@ public class EntityAccount implements Account {
     }
 
     public EntityAccount(int number, Person entityPerson, Tariff tariff) {
-        this.number = number;
+        super(number, tariff);
         this.entityPerson = entityPerson;
-        this.tariff = tariff;
     }
 
     public Person getPerson() {
@@ -36,7 +35,7 @@ public class EntityAccount implements Account {
     }
 
     @Override
-    public int getNumber() {
+    public long getNumber() {
         return number;
     }
 

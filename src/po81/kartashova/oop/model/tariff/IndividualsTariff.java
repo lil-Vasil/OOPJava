@@ -143,6 +143,7 @@ public class IndividualsTariff extends AbstractTariff {
         return price + MAX_PRICE;
     }
 
+
 }
 
 

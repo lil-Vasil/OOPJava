@@ -4,9 +4,11 @@ import po81.kartashova.oop.model.account.Account;
 import po81.kartashova.oop.model.account.IndividualAccount;
 import po81.kartashova.oop.model.tariff.Tariff;
 
+import java.util.Arrays;
+
 public class AccountManager {
 
-    private Account[] accounts;
+    private final Account[] accounts;
     private int count = 0;
 
     public AccountManager(int size) {
@@ -99,5 +101,49 @@ public class AccountManager {
     private boolean isNumberAccount(Account account, int number) {
         return account.getNumber() == number;
     }
-}
 
+
+    public Account[] getAccountsByServiceType(ServiceTypes serviceTypes) {
+        Account[] notNullAccountArray = accountsNotNullArray();
+        return (Account[]) Arrays.stream(notNullAccountArray)
+                .filter(account -> getServiceArraySizeByType(account.getTariff(), serviceTypes) > 0)
+                .toArray();
+//        Account[] accountArrayByServiceType = new Account[count];
+//        int count = 0;
+//        for (int i = 0; i <= notNullAccountArray.length; i++) {
+//            Service[] servicesByType = getServiceArrayByType(notNullAccountArray[i].getTariff(), serviceTypes);
+//            if (servicesByType.length != 0) {
+//                accountArrayByServiceType[count] = notNullAccountArray[i];
+//                count++;
+//            }
+//        }
+//        return accountArrayByServiceType;
+    }
+
+    private int getServiceArraySizeByType(Tariff tariff, ServiceTypes serviceTypes) {
+        return tariff.serviceTypesArray(serviceTypes).length;
+    }
+
+    public Account[] accountsNotNullArray() {
+        Account[] newArray = new Account[count];
+        int count = 0;
+        for (Account account : accounts) {
+            if (account != null) {
+                newArray[count] = account;
+                count++;
+            }
+
+        }
+        return newArray;
+    }
+
+    public Long[] getIndividualNumbers() {
+        return (Long[]) Arrays.stream(accounts).map(Account::getNumber).toArray();
+    }
+
+    public Long[] getEntityNumbers() {
+        return (Long[]) Arrays.stream(accounts).map(Account::getNumber).toArray();
+    }
+
+
+}
